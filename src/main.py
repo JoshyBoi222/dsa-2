@@ -321,15 +321,14 @@ class Truck:
         thirdMiles = int(thirdTruck.miles)
 
         # Print the trucks stats information for the user interface
-        print("Information for the start time, end time and miles driven for each truck:")
-        print(f"The {firstTruck.name}: {firstStart}, {firstEnd}, {firstMiles} miles")
-        print(f"The {secondTruck.name}: {secondStart}, {secondEnd}, {secondMiles} miles")
-        print(f"The {thirdTruck.name}: {thirdStart}, {thirdEnd}, {thirdMiles} miles")
+        print(f"The {firstTruck.name} started delivery at {firstStart} and finished delivering all its packages at {firstEnd}. This truck drove a total of {firstMiles} miles.")
+        print(f"The {secondTruck.name} started delivery at {secondStart} and finished delivering all its packages at {secondEnd}. This truck drove a total of {secondMiles} miles.")
+        print(f"The {thirdTruck.name} started delivery at {thirdStart} and finished delivering all its packages at {thirdEnd}. This truck drove a total of {thirdMiles} miles.")
 
         # Calculate the total mileage from all three trucks combined
         totalMiles = int(firstTruck.miles + secondTruck.miles + thirdTruck.miles)
         # Print the total mileage
-        print(f"The total mileage for all three trucks: {totalMiles} miles")
+        print(f"All three trucks combined had a total mileage of {totalMiles} miles.")
 
 
 
@@ -339,9 +338,9 @@ class Truck:
 # Create a hash table object for storing package details
 packageHashTable = HashTable()
 # Load the package data from the CSV file into the package hash table
-loadPackageData('src/Packages.csv', packageHashTable)
+loadPackageData('Packages.csv', packageHashTable)
 # Load the distance data from the CSV file into a nested dictionary
-locationsDictionary = loadDistanceData('src/Distances.csv')
+locationsDictionary = loadDistanceData('Distances.csv')
 
 # Create instances of Truck for each delivery truck
 firstTruck = Truck("first truck")
@@ -371,7 +370,7 @@ Truck.startDelivery(firstTruck, secondTruck, thirdTruck, locationsDictionary, pa
 # The interface code for the user to interact with the program
 while True:
     # Keep asking the user for input until they quit
-    userInput = input("\nEnter a time (HH:MM AM/PM) to check the statuses of all packages or to check the status of a single package. Type 'q' to quit the program:\n")
+    userInput = input("\nEnter a time (HH:MM AM/PM) to check the statuses of all 40 packages or to check the status of a single package. Type 'q' to quit the program.\n")
     # If the user input is 'q'
     if userInput.lower() == 'q':
         # End the loop and program
@@ -413,7 +412,7 @@ while True:
 
 
         # Let the user decide between two options
-        userOption = input(f"Type 'a' to show the statuses of all packages at {userTime.strftime('%I:%M %p')}:\nType 'b' to show the status of a single package at {userTime.strftime('%I:%M %p')}:\n")
+        userOption = input(f"Type 'a' to show the statuses of all 40 packages at {userTime.strftime('%I:%M %p')}.\nType 'b' to show the status of a single package at {userTime.strftime('%I:%M %p')}.\n")
         # If the user input is 'a'
         if userOption.lower() == 'a':
             print(f"\nPackage information at {userTime.strftime('%I:%M %p')}:\n")
@@ -433,7 +432,7 @@ while True:
 
                 packageStatus = packageTime.get(packageID)
                 if package:
-                    print(f"ID - {packageID}; Status - {packageStatus}; Address - {package.address}; Deadline - {package.deadline}; Truck - {package.truck}")
+                    print(f"ID - {packageID}; Address - {package.address}; Deadline - {package.deadline}; Status - {packageStatus}")
 
 
 
@@ -441,7 +440,7 @@ while True:
         elif userOption.lower() == 'b':
             # Keep asking the user for input until they quit
             while True:
-                userPackage = input(f"Enter the package ID (1-40) you want to see. Type 'g' to go back:\n")
+                userPackage = input(f"Enter a package ID (1-40) to see its status at {userTime.strftime('%I:%M %p')}. Type 'g' to go back to the main menu.\n")
                 # If the user input is 'g'
                 if userPackage.lower() == 'g':
                     # End the inner loop and go back to the main program
@@ -459,7 +458,7 @@ while True:
                         userPackageStatus = packageTime.get(packageID)
                         # Print the package ID and the package status
                         if package:
-                            print(f"ID - {packageID}; Status - {userPackageStatus}; Address - {package.address}; Deadline - {package.deadline}; Truck - {package.truck}")
+                            print(f"\nID - {packageID}\nAddress - {package.address}\nDeadline - {package.deadline}\nStatus - {userPackageStatus}")
                     else:
                         # Error handling to deal with numbers that are out of range
                         print("Please enter a number between 1 and 40.\n")
